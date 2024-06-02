@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+video,img{
+  display: block;
+  width: 100%;
+}
+
+section{
+  @apply max-w-7xl mx-auto
+}
