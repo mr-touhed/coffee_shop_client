@@ -3,6 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
+import Profile from "../pages/Profile";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -33,8 +35,18 @@ const router = createBrowserRouter([
             {
                 path:"events",
                 element:'event'
+            },
+            {
+                path:"dashboard",
+                element:<Dashboard/>,
+                children:[
+                    {
+                        path:"profile",
+                        element:<Profile/>
+                    }
+                ]
             }
-
+            
         ]
     }
 ])

@@ -1,10 +1,19 @@
+import CoffeeSection from "../components/HistorySection/CoffeeSection";
+import HistorySection from "../components/HistorySection/HistorySection";
+import Partners from "../components/Partners/Partners";
+import SpacialMenu from "../components/SpacialMenu/SpacialMenu";
+
 
 
 const Home = () => {
     return (
-        <section className="bg-primary ">
-            this is home
-        </section>
+        <div className="bg-primary ">
+            
+            <CoffeeSection/>
+            <HistorySection/>
+            <Partners/>
+            <SpacialMenu/>
+        </div>
     );
 };
 

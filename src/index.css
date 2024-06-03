@@ -10,5 +10,26 @@ video,img{
 }
 
 section{
-  @apply max-w-7xl mx-auto
+  @apply max-w-7xl mx-auto py-16
+}
+
+.rotate-circle text{
+  color: white;
+  font-size: 2vw;
+  font-weight: bolder;
+  text-transform: uppercase;
+ 
+  
+}
+.rotate-circle{
+  animation: rotateAnimation 50s infinite  ease;
+}
+
+@keyframes rotateAnimation {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
 }
