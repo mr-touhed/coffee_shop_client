@@ -9,10 +9,10 @@ import list2 from "../../images/ab2.svg"
 import list3 from "../../images/ab3.svg"
 const HistorySection = () => {
     return (
-        <div className="bg-[#161616] text-gray-300  ">
-                    <section className="grid grid-cols-[2fr_1fr] gap-4">
+        <div className="bg-[#161616] text-gray-300 md:px-0 px-6">
+                    <section className="grid md:grid-cols-[2fr_1fr] gap-4">
                     <div>
-                    <div className="flex items-center gap-16">
+                    <div className="flex md:flex-row flex-col items-center gap-16">
                         <div className="space-y-16 flex flex-col ">
                         <img src={people} alt="" className="w-96"/>
                         <div className="self-end ">
@@ -56,12 +56,12 @@ const HistorySection = () => {
                                                 </path>
                                             </defs>
                                             <text>
-                                                <textPath xlinkHref="#textcircle" textLength="900" > cafee shop house restourant </textPath>
+                                                <textPath className="text-4xl" xlinkHref="#textcircle" textLength="900" > cafee shop house restourant </textPath>
                                             </text>
                                         </svg>
                                         
                                     </div>
-                                    <img src={anisvg} alt="" className="absolute top-[35%] left-[35%] z-10 w-32  "/>
+                                    <img src={anisvg} alt="" className="absolute md:top-[35%] top-[35%]   md:left-[35%] left-[35%] z-10 md:w-32 w-20 "/>
                    </div>
                    
                    <img src={coffeemake} alt="" />

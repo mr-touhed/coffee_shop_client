@@ -13,14 +13,7 @@ section{
   @apply max-w-7xl mx-auto py-16
 }
 
-.rotate-circle text{
-  color: white;
-  font-size: 2vw;
-  font-weight: bolder;
-  text-transform: uppercase;
- 
-  
-}
+
 .rotate-circle{
   animation: rotateAnimation 50s infinite  ease;
 }

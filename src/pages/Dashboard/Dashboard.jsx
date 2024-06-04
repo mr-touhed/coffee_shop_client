@@ -14,7 +14,10 @@ const Dashboard = () => {
                         
                     </li>
                     <li>
-                    <NavLink to="/dashboard/products" className={({isActive}) => isActive ?  "border-2 bg-slate-500 text-gray-100  px-4 py-2 rounded-xl  block" : "bg-transparent px-4 py-2 rounded-xl border block"} end>Products</NavLink>
+                    <NavLink to="/dashboard/all_products" className={({isActive}) => isActive ?  "border-2 bg-slate-500 text-gray-100  px-4 py-2 rounded-xl  block" : "bg-transparent px-4 py-2 rounded-xl border block"} end>Products</NavLink>
+                    </li>
+                    <li>
+                    <NavLink to="/dashboard/add_product" className={({isActive}) => isActive ?  "border-2 bg-slate-500 text-gray-100  px-4 py-2 rounded-xl  block" : "bg-transparent px-4 py-2 rounded-xl border block"} end>Add New Product</NavLink>
                     </li>
                     
                         

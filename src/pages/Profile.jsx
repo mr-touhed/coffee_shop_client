@@ -1,15 +1,44 @@
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../firebase/firebase.config";
+import { useEffect, useState } from "react";
+import { URL_PATH } from "../utils/URL";
 
 
 const Profile = () => {
     const auth = getAuth(app)
-    const [user,loading ] = useAuthState(auth);
+    const [user] = useAuthState(auth);
+    const [loading,setLoading] = useState(false)
+    const [userData,setUserData] =useState({}) 
+    useEffect(()=>{
+        setLoading(true)
+        const fetch_user = async ()=>{
+            
+            try {
+                const response = await fetch(`${URL_PATH}/api/user`,{
+                    method:"GET",
+                    headers:{
+                        email: user.email
+                    }
+                })
 
-    if(loading){
-        return 
-    }
+                const data = await response.json()
+                setUserData(data.result)
+                setLoading(false)
+            } catch (error) {
+                console.log(error);
+                setLoading(false)
+            }
+        }
+        if(user){
+            console.log(user, "useEffect");
+            fetch_user()
+        }
+        
+    },[user])
+    
+        if(loading) return 
+        console.log(userData);
     return (
         <div>
             <section className="min-h-[80vh] mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg">
@@ -22,14 +51,14 @@ const Profile = () => {
             </span>
         </div>
         <div className="mt-6 w-fit mx-auto">
-            <img src={user?.photoURL} className="rounded-full w-28 " alt="profile picture" srcSet="" />
+            <img src={userData?.photoURL || user?.photoURL} className="rounded-full w-28 " alt="profile picture" srcSet="" />
         </div>
 
         <div className="mt-8 ">
-            <h2 className="text-white font-bold text-2xl tracking-wide">{user?.displayName}</h2>
+            <h2 className="text-white text-center font-bold text-2xl tracking-wide">{userData?.displayName}</h2>
         </div>
         <p className="text-emerald-400 text-2xl font-semibold text-center mt-2.5" >
-            {user?.email}
+            {userData?.email}
         </p>
 
         {/* <div className="h-1 w-full bg-black mt-8 rounded-full">

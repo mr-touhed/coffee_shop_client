@@ -18,8 +18,9 @@ const MenuBar = () => {
    {user && <li><Link to="/dashboard">Dashboard</Link></li>}
     </>
     return (
-        <section className="navbar bg-[#ffffff65] backdrop-blur-md" >
-  <div className="navbar-start">
+        <div className=" sticky top-0 bg-[#ffffff1c] backdrop-blur-md" >
+            <section className="navbar">
+            <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -29,10 +30,10 @@ const MenuBar = () => {
        
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <a className="btn btn-ghost text-xl">Coffee Shop</a>
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
+    <ul className="menu menu-horizontal px-1 text-gray-300">
     {MenuItems}
       
      
@@ -43,7 +44,8 @@ const MenuBar = () => {
         user ? <Profile signOut={signOut} img={user?.photoURL}/> : <Link to="/auth">Login</Link>
     }
   </div>
-</section>
+            </section>
+</div>
     );
 };
 

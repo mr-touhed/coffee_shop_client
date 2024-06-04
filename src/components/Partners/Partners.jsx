@@ -8,17 +8,17 @@ const Partners = () => {
     return (
         <div className="bg-primary  pt-32">
                 <section className="relative   border-t border-dotted">
-                                    <h2 className="text-3xl absolute -top-6 left-1/2 -translate-x-1/2 font-extrabold inline-block bg-secondary px-6 py-2 text-gray-200 rounded-2xl">Our Clients</h2>
+                                    <h2 className="md:text-3xl text-1xl absolute -top-6 left-1/2 -translate-x-1/2 font-extrabold inline-block bg-secondary px-6 py-2 text-gray-200 rounded-2xl">Our Clients</h2>
 
 
 
-                                <div className="grid grid-cols-6 w-full mt-32 items-center">
-                                            <img src={img1} className="w-24" alt="" />
-                                            <img src={img2} className="w-24" alt="" />
-                                            <img src={img3} className="w-24" alt="" />
-                                            <img src={img4} className="w-24" alt="" />
-                                            <img src={img5} className="w-24" alt="" />
-                                            <img src={img6} className="w-24" alt="" />
+                                <div className="grid md:grid-cols-6 grid-cols-3 px-4 md:px-0 w-full mt-32 justify-center items-center">
+                                            <img src={img1} className="md:w-24 w-16" alt="" />
+                                            <img src={img2} className="md:w-24 w-16" alt="" />
+                                            <img src={img3} className="md:w-24 w-16" alt="" />
+                                            <img src={img4} className="md:w-24 w-16" alt="" />
+                                            <img src={img5} className="md:w-24 w-16" alt="" />
+                                            <img src={img6} className="md:w-24 w-16" alt="" />
                                 </div>
 
                 </section>

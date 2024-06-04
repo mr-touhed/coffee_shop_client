@@ -2,14 +2,15 @@ import { app } from "../../firebase/firebase.config";
 import { getAuth, } from 'firebase/auth';
 import { useState } from "react";
 import { useCreateUserWithEmailAndPassword, useUpdateProfile ,useAuthState } from 'react-firebase-hooks/auth';
+import { insert_user_Db } from "../../utils/create_user_Db";
+import { useNavigate } from "react-router-dom";
 const Register = ({setRegister}) => {
-
+    const navigate = useNavigate();
+    const [error,setError] = useState('')
     const auth = getAuth(app);
     const [newUser,setNewUser] = useState({email:"",password:"",displayName:""})
     const [
-        createUserWithEmailAndPassword,
-        createUser,
-            ] = useCreateUserWithEmailAndPassword(auth);
+        createUserWithEmailAndPassword,_,errorCreate] = useCreateUserWithEmailAndPassword(auth);
       const [updateProfile] = useUpdateProfile(auth);
       const [user, ] = useAuthState(auth);
       const handelChange = (e) =>{
@@ -23,19 +24,27 @@ const Register = ({setRegister}) => {
         const {email,password,displayName} = newUser
             e.preventDefault();
             try {
-                await createUserWithEmailAndPassword(email,password);
+               const create_user =  await createUserWithEmailAndPassword(email,password);
+                
+                if(create_user){
+                   const updatedUser =  await updateProfile({ displayName })
 
-                if(createUser){
-                    await updateProfile({ displayName })
+                    if(updatedUser){
+                       const result = await  insert_user_Db(newUser)
 
-                   
-                }
+                       if(result){
+                        navigate("/dashboard", {replace:true})
+                       }
+
+                    }
+                 }else{
+                    setError('error from firebase')
+                 }
             } catch (error) {
                 console.log(error);
             }
       }
 
-      console.log(user);
     return (
         <div>
                 <h2 className="text-2xl text-center">Register</h2>
@@ -57,6 +66,7 @@ const Register = ({setRegister}) => {
             <input type="submit" className="btn bg-primary hover:bg-secondary text-white border-0" value="Register" />
             </label>
         </form>
+            {error && <p>{JSON.stringify(error)}</p>}
             <p onClick={()=>setRegister(false)} className="text-xs text-center mt-6 underline cursor-pointer">if you have alrady account ? please Login!</p>
         </div>
     );
