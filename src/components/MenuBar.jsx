@@ -18,8 +18,8 @@ const MenuBar = () => {
    {user && <li><Link to="/dashboard">Dashboard</Link></li>}
     </>
     return (
-        <div className=" sticky top-0 bg-[#ffffff1c] backdrop-blur-md" >
-            <section className="navbar">
+        <div className=" sticky top-[0px] z-50 bg-[#3c161692] backdrop-blur-md border-b-2 border-[#5124242c]" >
+            <section className="navbar text-gray-200">
             <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -30,7 +30,7 @@ const MenuBar = () => {
        
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">Coffee Shop</a>
+    <a className="btn btn-ghost text-xl">COFFEE BITE</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 text-gray-300">
