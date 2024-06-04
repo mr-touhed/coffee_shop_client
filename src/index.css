@@ -26,3 +26,24 @@ section{
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+  background: #dcdada;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3rem;
+  }

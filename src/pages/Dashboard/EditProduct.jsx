@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { URL_PATH } from "../../utils/URL";
 import { useLoaderData } from "react-router-dom";
-
+import { send_token } from "../../utils/send_token";
+import toast, { Toaster } from 'react-hot-toast';
+import { getAuth } from "firebase/auth";
+import { app } from "../../firebase/firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const EditProduct = () => {
+    const auth = getAuth(app);
+  const [user] = useAuthState(auth);
+
     const fetchProduct = useLoaderData()?.product || {name:'',price:'',img:'',catagory:'',details:'',exclusive:false,reguler_price:''}
     const [product,setProduct] = useState(fetchProduct);
     
@@ -22,15 +29,13 @@ const EditProduct = () => {
                 const updateDoc = {...product,price:parseInt(product.price)}
             const response = await fetch(`${URL_PATH}/api/product/${product._id}`,{
                 method:"PATCH",
-                headers:{
-                    "content-type":"application/json"
-                },
+                headers:send_token(),
                 body:JSON.stringify(updateDoc)
             })
             const result = await response.json();
             if(result.status){
                 //
-                alert("product updated now")
+                toast('your product updated now!');
             }
         } catch (error) {
             console.log(error);
@@ -39,7 +44,7 @@ const EditProduct = () => {
 
     return (
         <div className="bg-zinc-600 h-[100vh]  text-gray-100">
-            <form onSubmit={handel_add_product} className="grid grid-cols-2 p-4 gap-6 text-gray-500">
+            <form onSubmit={handel_add_product} className="grid md:grid-cols-2 grid-cols-1 p-4 gap-6 text-gray-500">
             <label className="form-control w-full ">
                     <div className="label text-gray-200">
                         <span className="label-text">Product Name</span>
@@ -97,7 +102,7 @@ const EditProduct = () => {
                             
                             </label>
                             <div>
-                                <input className="btn btn-primary mx-auto block" type="submit" value="update product" />
+                                <input disabled={user.email !== product.author} className="btn btn-primary mx-auto block" type="submit" value="update product" />
                             </div>
                                 <div className=" gap-6 max-w-sm flex text-gray-200">
                                 <label className="label cursor-pointer">
@@ -111,6 +116,7 @@ const EditProduct = () => {
                                 </div>
                            
             </form>
+            <Toaster />
         </div>
     );
 };

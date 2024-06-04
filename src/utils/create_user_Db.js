@@ -10,7 +10,10 @@ export const insert_user_Db = async (newUser) =>{
             body:JSON.stringify(newUser)
         });
 
-                await response.json();
+              const result =   await response.json();
+              
+              const token = result.token;
+              localStorage.setItem("tkn",token)
         return true
     } catch (error) {
         console.log(error);

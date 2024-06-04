@@ -1,16 +1,16 @@
 import PageHeader from "../components/PageHeader";
-
+import bg from "../images/video_bg.jpg"
 
 const Contact = () => {
     return (
-        <div>
+        <div style={{backgroundImage:`url(${bg})`}} className="bg-cover bg-left bg-no-repeat">
             <PageHeader>
                         Contact Us
             </PageHeader>
 
 
             <section>
-                            <div className="contact-form max-w-[700px] bg-gray-300 mx-auto border p-6 rounded-lg flex flex-col gap-6">
+                            <div className="contact-form max-w-[700px] bg-[#ebe3e367] mx-auto border p-6 rounded-lg flex flex-col gap-6">
                                     <h5 className="fsz-30 mb-20"> Get In Touch. </h5>
                                     <div className="form-group">
                                         <label  className="fsz-14"> Your Name * </label>

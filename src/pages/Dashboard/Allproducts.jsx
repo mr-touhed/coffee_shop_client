@@ -1,23 +1,28 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { URL_PATH } from "../../utils/URL";
 import { useState } from "react";
-
+import { send_token } from "../../utils/send_token";
+import toast, { Toaster } from 'react-hot-toast';
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { app } from "../../firebase/firebase.config";
 const Allproducts = () => {
+  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
     const products_data = useLoaderData()?.result || [];
-    const [products,setProducts] = useState(products_data)
+    const [products,setProducts] = useState(products_data.filter(product => product.author === user.email))
 
     const delete_product = async (id) =>{
         try {
             const response = await fetch(`${URL_PATH}/api/product/${id}`,{
                     method:"DELETE",
-                    headers:{
-                        "content-type": "application/json",
-
-                    },
+                    headers:send_token(),
                 })
                 const result = await response.json();
                 if(result.status){
+                  toast('Product has been deleted')
                     const update_products = products.filter(product => product._id !== id);
+                    
                     setProducts(update_products)
                 }   
         } catch (error) {
@@ -28,7 +33,7 @@ const Allproducts = () => {
     return (
         <div>
             <div className="overflow-x-auto">
-  <table className="table">
+  <table className="table text-gray-200">
     {/* head */}
     <thead>
       <tr>
@@ -46,7 +51,7 @@ const Allproducts = () => {
     <tbody>
       {/* row 1 */}
       {
-        products_data.map((product,index) => {
+        products.map((product,index) => {
             const {name,img,catagory,exclusive,price,reguler_price,_id} = product;
            return (<tr key={product._id}>
                 <th>
@@ -94,6 +99,7 @@ const Allproducts = () => {
     
   </table>
 </div>
+<Toaster />
         </div>
     );
 };

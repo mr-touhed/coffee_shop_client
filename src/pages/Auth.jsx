@@ -9,7 +9,7 @@ import { insert_user_Db } from "../utils/create_user_Db";
 import { useNavigate } from "react-router-dom";
 const Auth = () => {
     const navigate = useNavigate()
-    const [register,setRegister] = useState(true)
+    const [register,setRegister] = useState(false)
     const auth = getAuth(app)
     const [signInWithGoogle] = useSignInWithGoogle(auth);
     const [signInWithFacebook] = useSignInWithFacebook(auth);
@@ -22,8 +22,9 @@ const Auth = () => {
             if(login){
                 const {email,displayName} = login.user
                 const userData = {email,displayName}
-                const result = insert_user_Db(userData)
+                const result =await insert_user_Db(userData)
                 if(result){
+                    
                     navigate("/dashboard", {replace:true})
                 }
             }

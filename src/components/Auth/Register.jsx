@@ -1,7 +1,7 @@
 import { app } from "../../firebase/firebase.config";
 import { getAuth, } from 'firebase/auth';
 import { useState } from "react";
-import { useCreateUserWithEmailAndPassword, useUpdateProfile ,useAuthState } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile , } from 'react-firebase-hooks/auth';
 import { insert_user_Db } from "../../utils/create_user_Db";
 import { useNavigate } from "react-router-dom";
 const Register = ({setRegister}) => {
@@ -9,10 +9,9 @@ const Register = ({setRegister}) => {
     const [error,setError] = useState('')
     const auth = getAuth(app);
     const [newUser,setNewUser] = useState({email:"",password:"",displayName:""})
-    const [
-        createUserWithEmailAndPassword,_,errorCreate] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
       const [updateProfile] = useUpdateProfile(auth);
-      const [user, ] = useAuthState(auth);
+      
       const handelChange = (e) =>{
             setNewUser(prev => ({
                 ...prev,

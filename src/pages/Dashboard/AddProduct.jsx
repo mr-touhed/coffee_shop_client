@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { URL_PATH } from "../../utils/URL";
-
+import { send_token } from "../../utils/send_token";
+import toast, { Toaster } from 'react-hot-toast';
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { app } from "../../firebase/firebase.config";
 
 const AddProduct = () => {
-    const [product,setProduct] = useState({name:'',price:'',img:'',catagory:'',details:'',exclusive:false,reguler_price:''});
+    const [product,setProduct] = useState({name:'',price:'',img:'',catagory:'Latte',details:'',exclusive:false,reguler_price:''});
+    const auth = getAuth(app);
+    const [user] = useAuthState(auth);
 
     const handel_change_input = (e) =>{
         setProduct(prev => ({
@@ -17,17 +23,16 @@ const AddProduct = () => {
     const handel_add_product = async (e) =>{
         e.preventDefault()
         try {
+           
             const response = await fetch(`${URL_PATH}/api/product`,{
                 method:"POST",
-                headers:{
-                    "content-type":"application/json"
-                },
-                body:JSON.stringify(product)
+                headers:send_token(),
+                body:JSON.stringify({...product,author:user?.email})
             })
             const result = await response.json();
             if(result.status){
-                //
-                setProduct({name:'',price:'',img:'',catagory:'',exclusive:false,reguler_price:''})
+                toast('add new product successfully !')
+                setProduct({name:'',price:'',img:'',catagory:'',exclusive:false,reguler_price:'',details:''})
             }
         } catch (error) {
             console.log(error);
@@ -51,14 +56,14 @@ const AddProduct = () => {
                         <span className="label-text">Offer Price</span>
                         
                     </div>
-                    <input onChange={(e)=>handel_change_input(e)} value={product.price} type="text" name="price" placeholder="offer Price" className="input input-bordered w-full " />
+                    <input onChange={(e)=>handel_change_input(e)} value={product.price} type="number" name="price" placeholder="offer Price" className="input input-bordered w-full " />
                    </div>
                    <div>
                    <div className="label text-gray-200">
                         <span className="label-text">Regular Price</span>
                         
                     </div>
-                    <input onChange={(e)=>handel_change_input(e)} value={product.reguler_price} type="text" name="reguler_price" placeholder="regular Price" className="input input-bordered w-full " />
+                    <input onChange={(e)=>handel_change_input(e)} value={product.reguler_price} type="number" name="reguler_price" placeholder="regular Price" className="input input-bordered w-full " />
                    </div>
                     
             </label>
@@ -108,6 +113,7 @@ const AddProduct = () => {
                                 </div>
                            
             </form>
+            <Toaster />
         </div>
     );
 };

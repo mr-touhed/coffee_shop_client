@@ -13,6 +13,7 @@ import ProductDetails from "../pages/ProductDetails";
 import Contact from "../pages/Contact";
 import About from "../pages/About";
 import Speacial from "../pages/Speacial";
+import Protected from "../Protected/Protected";
 
 const router = createBrowserRouter([
     {
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"dashboard",
-                element:<Dashboard/>,
+                element:<Protected><Dashboard/></Protected>,
                 children:[
                     {
                         path:"profile",
