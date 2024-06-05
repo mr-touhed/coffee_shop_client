@@ -1,8 +1,35 @@
-# React + Vite
+# Coffee Bite Client Code
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A online coffee shop web app, using with REACT library
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use the package manager [github](https://www.npmjs.com/) to install Coffee Bite.
+
+```bash
+$ git clone https://github.com/mr-touhed/coffee_shop_client.git
+
+```
+```bash
+$ npm install
+
+```
+
+## Usage
+
+```javascript
+# firebase (change firebase config code with .env file)
+# swiper
+# react-hot-toast
+# react-firebase-hooks
+```
+
+## Features
+
+user can login with goolge,facebook, github, and registation with email and password
+
+User can create a product post, Add post, Delete Post, and Update Also
+
+## Production
+
+[LIVE LINK](https://super-shop-fccee.web.app/)
