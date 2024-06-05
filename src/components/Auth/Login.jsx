@@ -4,11 +4,14 @@ import { useState } from "react";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useNavigate } from "react-router-dom";
 import { insert_user_Db } from "../../utils/create_user_Db";
+import toast, { Toaster } from 'react-hot-toast';
 const Login = ({setRegister}) => {
     const navigate = useNavigate()
     const auth = getAuth(app);
     const [newUser,setNewUser] = useState({email:"",password:""})
-    const [signInWithEmailAndPassword ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword,user,
+        loading,
+        error, ] = useSignInWithEmailAndPassword(auth);
      
       const handelChange = (e) =>{
             setNewUser(prev => ({
@@ -28,7 +31,10 @@ const Login = ({setRegister}) => {
                     return navigate('/dashboard')
                    }
                     
+                }else{
+                    toast(error.message);
                 }
+                console.log(user);
                 
             } catch (error) {
                 console.log(error);
@@ -47,14 +53,15 @@ const Login = ({setRegister}) => {
                 </label>
             <label className="input input-bordered flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clipRule="evenodd" /></svg>
-            <input onChange={(e)=>handelChange(e)} value={newUser.password} name="password" type="password" className="grow"  required/>
+            <input onChange={(e)=>handelChange(e)} value={newUser.password} name="password" type="password" className="grow " placeholder="password" required/>
             </label>
             <label className=" flex justify-center ">
             
-            <input type="submit" className="btn bg-primary hover:bg-secondary text-white border-0" value="Login" />
+            <input type="submit" className="btn w-full bg-primary hover:bg-secondary text-white border-0" value="Login" />
             </label>
         </form>
             <p onClick={()=>setRegister(true)} className="text-xs text-center mt-6 underline cursor-pointer">if you dont&apos;t have any account ? please Register!</p>
+            <Toaster />
         </div>
     );
 };

@@ -4,12 +4,15 @@ import { useState } from "react";
 import { useCreateUserWithEmailAndPassword, useUpdateProfile , } from 'react-firebase-hooks/auth';
 import { insert_user_Db } from "../../utils/create_user_Db";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 const Register = ({setRegister}) => {
     const navigate = useNavigate();
-    const [error,setError] = useState('')
+
     const auth = getAuth(app);
     const [newUser,setNewUser] = useState({email:"",password:"",displayName:""})
-    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword,user,
+        loading,
+        error,] = useCreateUserWithEmailAndPassword(auth);
       const [updateProfile] = useUpdateProfile(auth);
       
       const handelChange = (e) =>{
@@ -37,7 +40,8 @@ const Register = ({setRegister}) => {
 
                     }
                  }else{
-                    setError('error from firebase')
+                    toast(error.message.split(":")[1])
+                 
                  }
             } catch (error) {
                 console.log(error);
@@ -62,11 +66,12 @@ const Register = ({setRegister}) => {
             </label>
             <label className=" flex justify-center ">
             
-            <input type="submit" className="btn bg-primary hover:bg-secondary text-white border-0" value="Register" />
+            <input type="submit" className="btn w-full bg-primary hover:bg-secondary text-white border-0" value="Register" />
             </label>
         </form>
-            {error && <p>{JSON.stringify(error)}</p>}
+           
             <p onClick={()=>setRegister(false)} className="text-xs text-center mt-6 underline cursor-pointer">if you have alrady account ? please Login!</p>
+            <Toaster />
         </div>
     );
 };

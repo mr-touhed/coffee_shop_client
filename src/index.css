@@ -29,7 +29,9 @@ section{
 
 
 
-
+.swiper-pagination-bullet{
+  background: #772222;
+}
 
 
 /* width */

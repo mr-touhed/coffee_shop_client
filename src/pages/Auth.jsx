@@ -7,6 +7,10 @@ import Login from "../components/Auth/Login";
 import bg from "../images/coffee.svg"
 import { insert_user_Db } from "../utils/create_user_Db";
 import { useNavigate } from "react-router-dom";
+import fbIcon from "../images/icons/facebook.png"
+import gmailIcon from "../images/icons/google.png"
+import githubIcon from "../images/icons/github.png"
+
 const Auth = () => {
     const navigate = useNavigate()
     const [register,setRegister] = useState(false)
@@ -38,10 +42,19 @@ const Auth = () => {
         <div style={{backgroundImage:`url(${bg})`}} className="bg-primary min-h-[100vh] flex justify-center items-center ">
             <section className="bg-[#ffffff46] backdrop-blur-sm w-[60vw] min-h-[70vh] rounded-xl p-4">
                     {register ? <Register setRegister={setRegister}/> : <Login setRegister={setRegister}/>}
-                    <div className="flex justify-center gap-6 mt-6">
-                        <button onClick={handel_gmail} className="btn ">google</button>
-                        <button onClick={() =>signInWithFacebook()} className="btn ">FB</button>
-                        <button onClick={() =>signInWithGithub()} className="btn ">Github</button>
+                    <div className="flex flex-col justify-center gap-2 mt-6">
+                        <button onClick={handel_gmail} className="btn bg-white flex  items-center ">
+                            <img src={gmailIcon} alt="" className="w-6"/>
+                            <span className="text-gray-700">Gmail</span>
+                            </button>
+                        <button onClick={() =>signInWithFacebook()} className="btn bg-white flex  items-center  ">
+                        <img src={fbIcon} alt="" className="w-6"/>
+                            <span className="text-gray-700">Facebook</span>
+                        </button>
+                        <button onClick={() =>signInWithGithub()} className="btn bg-white flex  items-center  ">
+                        <img src={githubIcon} alt="" className="w-6"/>
+                            <span className="text-gray-700">Github</span>
+                            </button>
                     </div>
             </section>
         </div>

@@ -7,9 +7,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../../firebase/firebase.config";
 
 const AddProduct = () => {
-    const [product,setProduct] = useState({name:'',price:'',img:'',catagory:'Latte',details:'',exclusive:false,reguler_price:''});
     const auth = getAuth(app);
     const [user] = useAuthState(auth);
+    const [product,setProduct] = useState({name:'',price:'',img:'',catagory:'Latte',details:'',exclusive:false,reguler_price:'',author:user.email});
+    
 
     const handel_change_input = (e) =>{
         setProduct(prev => ({
@@ -33,10 +34,13 @@ const AddProduct = () => {
             if(result.status){
                 toast('add new product successfully !')
                 setProduct({name:'',price:'',img:'',catagory:'',exclusive:false,reguler_price:'',details:''})
+            }else{
+                toast(result.massage)
             }
         } catch (error) {
             console.log(error);
         }
+        
     }
 
     return (

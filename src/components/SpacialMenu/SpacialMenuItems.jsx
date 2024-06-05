@@ -84,12 +84,12 @@ export default SpacialMenuItems;
 
 
 function SpacialCard({product,index}){
-    const {name,catagory,price,reguler_price} = product
+    const {name,catagory,price,reguler_price,img} = product
     return (
         <div className="text-gray-300 grid md:grid-cols-[10rem_1.5fr_2fr_1fr]  items-center p-4">
                                         <span className="text-2xl font-bold">{index+1}</span>
                                         <div className="flex md:flex-row flex-col  gap-6 items-center">
-                                            <img className="w-24 rounded-2xl" src={cfe} alt="" />
+                                            <img className="w-24 rounded-2xl" src={img} alt="" />
                                             <div className="text-center">
                                                 <h2 className="text-2xl font-bold">{name}</h2>
                                                 <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, perspiciatis.</p>
