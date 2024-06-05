@@ -4,7 +4,7 @@ A online coffee shop web app, using with REACT library
 
 ## Installation
 
-Use the package manager [github](https://www.npmjs.com/) to install Coffee Bite.
+
 
 ```bash
 $ git clone https://github.com/mr-touhed/coffee_shop_client.git
